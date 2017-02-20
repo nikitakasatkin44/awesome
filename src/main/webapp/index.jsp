@@ -86,7 +86,7 @@
         }
 
         /* The Modal (background) */
-        .mod    al {
+        .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
@@ -167,14 +167,13 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">About me</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><button id="popup1" onclick="div_show()">Popup</button></li>
-                <li><button id="popup2" onclick="div_hide()">Popup</button></li>
                 <li><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button></li>
+                <li><button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Registration</button></li>
             </ul>
         </div>
     </div>
@@ -183,18 +182,16 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-            <p><a href="https://www.tutorialspoint.com/java_technology_tutorials.htm">tutorialspoint.com</a></p>
-            <p><a href="http://www.mkyong.com/">mkyong.com</a></p>
-            <p><a href="#">Link</a></p>
+            <p><a href="https://www.tutorialspoint.com">tutorialspoint.com</a></p>
+            <p><a href="http://www.mkyong.com">mkyong.com</a></p>
+            <p><a href="https://www.w3schools.com">w3schools.com</a></p>
+            <p><a href="http://www.journaldev.com">journaldev.com</a></p>
         </div>
         <div class="col-sm-8 text-left">
             <h1>Landing Page</h1>
 
-            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-
             <div id="id01" class="modal">
-
-                <form class="modal-content animate" action="/action_page.php">
+                <form class="modal-content animate" action="/login">
                     <div class="imgcontainer">
                         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                         <img src="img_avatar2.png" alt="Avatar" class="avatar">
@@ -202,10 +199,10 @@
 
                     <div class="container">
                         <label><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="uname" required>
+                        <input type="text" placeholder="Enter Username" name="username" required>
 
                         <label><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" required>
+                        <input type="password" placeholder="Enter Password" name="password" required>
 
                         <button type="submit">Login</button>
                         <input type="checkbox" checked="checked"> Remember me
@@ -218,39 +215,44 @@
                 </form>
             </div>
 
+            <div id="id02" class="modal">
+                <form class="modal-content animate" action="/registration">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title"Close Modal">&times;</span>
+                        <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                    </div>
+
+                    <div class="container">
+                        <label><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="username" required>
+
+                        <label><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+
+                        <label><b>Confirm Password</b></label>
+                        <input type="password" placeholder="Retype Password" name="password" required>
+
+                        <button type="submit">Registrate</button>
+                    </div>
+                </form>
+            </div>
 
             <p>This site created entirely for educational purposes.</p>
             <hr>
-            <h3>Test</h3>
-            <p>Lorem ipsum...</p>
         </div>
         <div class="col-sm-2 sidenav">
+            <h3>These books served me as good source of knowledge:</h3>
             <div class="well">
-                <p>ADS</p>
+                <p>"Spring in Action, 4th edition" by Craig Walls</p>
             </div>
             <div class="well">
-                <p>ADS</p>
+                <p>"Beginning Java EE 7" by Antonio Goncalves</p>
+            </div>
+            <div class="well">
+                <p>"Java. The Complete Reference" by Herbert Schildt</p>
             </div>
         </div>
     </div>
-    <div id="popupbox">
-        <form name="login" action="" method="post">
-            <center>Username:</center>
-            <center><input name="username" size="14" /></center>
-            <center>Password:</center>
-            <center><input name="password" type="password" size="14" /></center>
-            <center><input type="submit" name="submit" value="login" /></center>
-        </form>
-        <br />
-        <center><a href="javascript:login('hide');">close</a></center>
-    </div>
-
-    <p>
-        Some text
-    </p>
-    <p>
-        Some more text
-    </p>
     <p><a href="javascript:login('show');">login</a></p>
 </div>
 
