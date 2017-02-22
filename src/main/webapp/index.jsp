@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,8 +173,8 @@
                 <li><a href="#">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button></li>
-                <li><button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Registration</button></li>
+                <li><button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button></li>
+                <li><button onclick="document.getElementById('registration-form').style.display='block'" style="width:auto;">Registration</button></li>
             </ul>
         </div>
     </div>
@@ -190,16 +191,20 @@
         <div class="col-sm-8 text-left">
             <h1>Landing Page</h1>
 
-            <div id="id01" class="modal">
-                <form class="modal-content animate" action="/login">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                        <img src="img_avatar2.png" alt="Avatar" class="avatar">
-                    </div>
+            <c:if test="${not empty message}">
+                <div class="alert alert-success">
+                        ${message}
+                </div>
+            </c:if>
 
+            <div id="login-form" class="modal">
+                <form class="modal-content animate" action="/registration">
                     <div class="container">
-                        <label><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="username" required>
+                        <label><b>Name</b></label>
+                        <input type="text" placeholder="Enter name" name="name" required>
+
+                        <label><b>Surname</b></label>
+                        <input type="text" placeholder="Enter surname" name="surname" required>
 
                         <label><b>Password</b></label>
                         <input type="password" placeholder="Enter Password" name="password" required>
@@ -215,24 +220,28 @@
                 </form>
             </div>
 
-            <div id="id02" class="modal">
-                <form class="modal-content animate" action="/registration">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title"Close Modal">&times;</span>
-                        <img src="img_avatar2.png" alt="Avatar" class="avatar">
-                    </div>
+            <div id="registration-form" class="modal">
+                <form class="modal-content animate" action="/registration" method="post" role="form" data-toggle="validator" name="registrationForm" onsubmit="return validateForm()">
+                    <c:if test ="${empty action}">
+                        <c:set var="action" value="add"/>
+                    </c:if>
 
                     <div class="container">
-                        <label><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="username" required>
+                        <input type="hidden" id="action" name="action" value="${action}">
 
-                        <label><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <label for="name"><b>Username</b></label>
+                        <input type="text" name="name" id="name" placeholder="Enter Username" value="${user.name}" required>
 
-                        <label><b>Confirm Password</b></label>
-                        <input type="password" placeholder="Retype Password" name="password" required>
+                        <label for="pass1"><b>Password</b></label>
+                        <input type="password" name="password" id="pass1" placeholder="Enter Password" value="${user.password}" required>
 
-                        <button type="submit">Registrate</button>
+                        <label for="pass2"><b>Confirm Password</b></label>
+                        <input type="password" name="repeatPassword" id="pass2" placeholder="Retype Password" value="${user.passwordConfirm}"  required>
+
+                        <label for="email"><b>Email</b></label>
+                        <input type="email" name="email" id="email" placeholder="Enter email"  required>
+
+                        <button type="submit">To register</button>
                     </div>
                 </form>
             </div>
@@ -253,58 +262,29 @@
             </div>
         </div>
     </div>
-    <p><a href="javascript:login('show');">login</a></p>
 </div>
+
+
 
 <footer class="container-fluid text-center">
     <p>Footer Text</p>
 </footer>
 
-
-
-
 </body>
 
 <script language="JavaScript" type="text/javascript">
-    function login(showhide) {
-        if (showhide == "show") {
-            document.getElementById('popupbox').style.visibility = "visible";
-        } else if (showhide == "hide") {
-            document.getElementById('popupbox').style.visibility = "hidden";
-        }
-    }
 
-    function registration(showhide) {
-        if (showhide == "show") {
-            document.getElementById('popupbox').style.visibility = "visible";
-        } else if (showhide == "hide") {
-            document.getElementById('popupbox').style.visibility = "hidden";
+    function validateForm() {
+        var pass1 = document.getElementById("pass1").value;
+        var pass2 = document.getElementById("pass2").value;
+        var ok = true;
+        if (pass1 != pass2) {
+            alert("Passwords Do not match");
+            document.getElementById("pass1").style.borderColor = "#E34234";
+            document.getElementById("pass2").style.borderColor = "#E34234";
+            ok = false;
         }
-    }
-
-    function check_empty() {
-        if (document.getElementById('name').value == "" || document.getElementById('email').value == "" || document.getElementById('msg').value == "") {
-            alert("Fill All Fields !");
-        } else {
-            document.getElementById('form').submit();
-            alert("Form Submitted Successfully...");
-        }
-    }
-    //Function To Display Popup
-    function div_show() {
-        document.getElementById('abc').style.display = "block";
-    }
-    //Function to Hide Popup
-    function div_hide(){
-        document.getElementById('abc').style.display = "none";
-    }
-
-    var modal = document.getElementById('id01');
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+        return ok;
     }
     </script>
 </html>
