@@ -6,20 +6,4 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
     <display-name>Archetype Created Web Application</display-name>
 
-    <context-param>
-        <param-name>dbUser</param-name>
-        <param-value>nick</param-value>
-    </context-param>
-    <context-param>
-        <param-name>dbPassword</param-name>
-        <param-value>1234</param-value>
-    </context-param>
-    <context-param>
-        <param-name>dbURL</param-name>
-        <param-value>jdbc:mysql://localhost:3306/users</param-value>
-    </context-param>
-    <context-param>
-        <param-name>log4j-config</param-name>
-        <param-value>WEB-INF/log4j.xml</param-value>
-    </context-param>
 </web-app>

@@ -1,5 +1,7 @@
 package com.project;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class User {
@@ -9,7 +11,13 @@ public class User {
     private String password;
     private String email;
     private long id;
-    private static final AtomicLong counter = new AtomicLong(100);
+    private static final AtomicLong counter = new AtomicLong(1);
+
+    private static final List<User> userList = new ArrayList();
+
+    public static List<User> getUserList() {
+        return userList;
+    }
 
     public User(String name, String surname, String password, String email, long id) {
         this.name = name;
@@ -70,3 +78,5 @@ public class User {
         this.surname = surname;
     }
 }
+
+

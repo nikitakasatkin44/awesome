@@ -27,12 +27,11 @@ public class UserRepository implements UserRepositoryDAO {
 
     public void addUser(String name, String surname, String password, String email) {
         User user = new User(name, surname, password, email);
-        long userID = user.getId();
 
-        String SQL = "INSERT INTO " + TABLE_NAME + " (id, name, surname, password, email) values (?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO " + TABLE_NAME + " (name, surname, password, email) values (?, ?, ?, ?)";
 
-        jdbcTemplateObject.update( SQL, userID, name, surname, password, email);
-        System.out.println("Created Record Name = " + userID + name + " salary = " + surname + password + email);
+        jdbcTemplateObject.update( SQL, name, surname, password, email);
+        System.out.println("Created Record Name = " + name + " salary = " + surname + password + email);
 
     }
 

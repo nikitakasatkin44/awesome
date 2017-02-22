@@ -37,15 +37,15 @@
         }
 
 
-        /* Full-width input fields */
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
+             /* Full-width input fields */
+         input[type=text], input[type=password] {
+             width: 100%;
+             padding: 12px 20px;
+             margin: 8px 0;
+             display: inline-block;
+             border: 1px solid #ccc;
+             box-sizing: border-box;
+         }
 
         /* Set a style for all buttons */
         button {
@@ -193,7 +193,7 @@
 
             <c:if test="${not empty message}">
                 <div class="alert alert-success">
-                    ${message}
+                        ${message}
                 </div>
             </c:if>
 
@@ -286,5 +286,5 @@
         }
         return ok;
     }
-</script>
+    </script>
 </html>

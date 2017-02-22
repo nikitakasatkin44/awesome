@@ -17,9 +17,9 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar">1</span>
-                <span class="icon-bar">2</span>
-                <span class="icon-bar">3</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
 
         </div>
@@ -31,8 +31,8 @@
                 <li><a href="#">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><button type="button" class="btn btn-success btn-lg" id="myBtnlog" onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button></li>
-                <li><button type="button" class="btn btn-info btn-lg" id="myBtnreg" onclick="document.getElementById('registration-form').style.display='block'" style="width:auto;">Registration</button></li>
+                <li><button class="btn btn-success btn-lg" onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button></li>
+                <li><button class="btn btn-info btn-lg" onclick="document.getElementById('registration-form').style.display='block'" style="width:auto;">Registration</button></li>
             </ul>
         </div>
     </div>
@@ -78,8 +78,11 @@
                 </form>
             </div>
 
-            <div class="container" id="registration-form">
 
+
+
+            <div class="container" id="registration-form">
+                <button type="button" class="btn btn-default btn-lg" id="myBtnreg">Registration</button>
 
                 <div class="modal fade" id="myModalreg" role="dialog">
                     <div class="modal-dialog">
@@ -89,7 +92,6 @@
                                 <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
                                 <br><h2> Registration</h2>
                             </div>
-
                             <div class="modal-body" style="padding:40px 50px;">
                                 <form action="/registration" method="post" role="form" data-toggle="validator" name="registrationForm" onsubmit="return validateForm()">
                                     <c:if test ="${empty action}">
@@ -123,6 +125,32 @@
 
                     </div>
                 </div>
+            </div>
+
+            <div id="registration-form1" class="modal">
+                <form class="modal-content animate" action="/registration" method="post" role="form" data-toggle="validator" name="registrationForm" onsubmit="return validateForm()">
+                    <c:if test ="${empty action}">
+                        <c:set var="action" value="add"/>
+                    </c:if>
+
+                    <div class="container">
+                        <input type="hidden" id="action" name="action" value="${action}">
+
+                        <label for="name"><b>Username</b></label>
+                        <input type="text" name="name" id="name1" placeholder="Enter Username" value="${user.name}" required>
+
+                        <label for="pass1"><b>Password</b></label>
+                        <input type="password" name="password" id="pass11" placeholder="Enter Password" value="${user.password}" required>
+
+                        <label for="pass2"><b>Confirm Password</b></label>
+                        <input type="password" name="repeatPassword" id="pass21" placeholder="Retype Password" value="${user.passwordConfirm}"  required>
+
+                        <label for="email"><b>Email</b></label>
+                        <input type="email" name="email" id="email1" placeholder="Enter email"  required>
+
+                        <button type="submit">To register</button>
+                    </div>
+                </form>
             </div>
 
             <p>This site created entirely for educational purposes.</p>

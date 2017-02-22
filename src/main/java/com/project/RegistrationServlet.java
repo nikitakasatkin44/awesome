@@ -85,7 +85,8 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String action = req.getParameter("action");
+        String action = "add";
+        //String action = req.getParameter("action");
         switch (action) {
             case "add":
                 addUser(req, resp);

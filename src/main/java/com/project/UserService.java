@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class UserService {
 
-    List<User> userList = UserList.getInstance();
+    List<User> userList = User.getUserList();
 
     ApplicationContext context =
             new FileSystemXmlApplicationContext(
@@ -24,7 +24,6 @@ public class UserService {
             (UserRepository)context.getBean("userRepository");
 
     public List<User> getAllUsers() {
-
 
         List<User> userList = userRepository.getOrderedUsers();
         return userList;
@@ -38,11 +37,8 @@ public class UserService {
                 .filter(e -> e.getName().equalsIgnoreCase(name) || e.getSurname().equalsIgnoreCase(name))
                 .sorted(groupByComparator)
                 .collect(Collectors.toList());
-        return userList;
+        return result;
     }
-
-
-
 
     public User getUser(long id) throws Exception {
         Optional<User> match
