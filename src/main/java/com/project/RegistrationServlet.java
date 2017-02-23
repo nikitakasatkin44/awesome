@@ -2,7 +2,6 @@ package com.project;
 
 import com.project.jdbc.UserRepository;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import javax.servlet.RequestDispatcher;
@@ -35,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
                     searchUserById(req, resp);
                     break;
                 case "searchByName":
-                    searchUserByName(req, resp);
+                    searchUsersByName(req, resp);
                     break;
             }
         }else{
@@ -67,10 +66,10 @@ public class RegistrationServlet extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private void searchUserByName(HttpServletRequest req, HttpServletResponse resp)
+    private void searchUsersByName(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String name = req.getParameter("searchName");
-        List<User> result = userService.searchUsersByName(name);
+        List<User> result = userService.filterUsers(name);
         forwardListUsers(req, resp, result);
     }
 
@@ -107,13 +106,19 @@ public class RegistrationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
 
-         userService.addUser(name, surname, password, email);
+        try {
+            userService.addUser(name, surname, password, email);
+            List<User> userList = userService.getAllUsers();
+            req.setAttribute("idUser", 1);
+            String message = "The new user has been successfully created.";
+            req.setAttribute("message", message);
+            forwardListUsers(req, resp, userList);
+        } catch(Exception e) {
+            
+        }
 
-        List<User> userList = userService.getAllUsers();
-        req.setAttribute("idUser", 1);
-        String message = "The new user has been successfully created.";
-        req.setAttribute("message", message);
-        forwardListUsers(req, resp, userList);
+
+
     }
 
     private void editUser(HttpServletRequest req, HttpServletResponse resp)
@@ -147,4 +152,6 @@ public class RegistrationServlet extends HttpServlet {
         List<User> userList = userService.getAllUsers();
         forwardListUsers(req, resp, userList);
     }
+
+
 }

@@ -6,20 +6,6 @@
   </head>
 
   <body>
-
-  <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav">
-                  <li><a href="/index.jsp">Home</a></li>
-                  <li class="active"><a href="/registration">Users</a></li>
-                  <li><a href="#">Projects</a></li>
-                  <li><a href="#">Contact</a></li>
-              </ul>
-          </div>
-      </div>
-  </nav>
-
     <div class="container">
         <h2>Users</h2>
 
@@ -49,7 +35,6 @@
                             <tr>
                                 <td>#</td>
                                 <td>Name</td>
-                                <td>Surname</td>
                                 <td>Password</td>
                                 <td>Email</td>
                             </tr>
@@ -64,7 +49,6 @@
                                     <a href="/registration?idUser=${user.id}&searchAction=searchById">${user.id}</a>
                                 </td>
                                 <td>${user.name}</td>
-                                <td>${user.surname}</td>
                                 <td>${user.password}</td>
                                 <td>${user.email}</td>
                                 <td><a href="#" id="remove"

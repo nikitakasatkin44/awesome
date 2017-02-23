@@ -1,5 +1,6 @@
 package com.project;
 
+import com.project.jdbc.UserList;
 import com.project.jdbc.UserRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class UserService {
 
-    List<User> userList = User.getUserList();
+    List<User> userList = UserList.getInstance();
 
     ApplicationContext context =
             new FileSystemXmlApplicationContext(
@@ -29,16 +30,7 @@ public class UserService {
         return userList;
     }
 
-    public List<User> searchUsersByName(String name) {
-        Comparator<User> groupByComparator = Comparator.comparing(User::getName)
-                .thenComparing(User::getSurname);
-        List<User> result = userList
-                .stream()
-                .filter(e -> e.getName().equalsIgnoreCase(name) || e.getSurname().equalsIgnoreCase(name))
-                .sorted(groupByComparator)
-                .collect(Collectors.toList());
-        return result;
-    }
+
 
     public User getUser(long id) throws Exception {
         Optional<User> match
@@ -79,6 +71,31 @@ public class UserService {
             return false;
         }
     }
+
+    public User getUser(String login) {
+        return userRepository.getUserByLogin(login);
+    }
+
+    public List<User> getUsers(String login) {
+        return userRepository.getUsers();
+    }
+
+    public List<User> filterUsers(String name) {
+        List<User> users = userRepository.getUsers();
+        Comparator<User> comparator = Comparator.comparing(User::getName)
+                .thenComparing(User::getSurname);
+        List<User> result = users
+                .stream()
+                .filter(e -> e.getName().equalsIgnoreCase(name) || e.getSurname().equalsIgnoreCase(name))
+                .sorted(comparator)
+                .collect(Collectors.toList());
+
+        return result;
+
+
+    }
+
+
 }
 
 

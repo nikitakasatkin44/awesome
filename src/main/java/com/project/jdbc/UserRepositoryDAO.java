@@ -11,7 +11,7 @@ public interface UserRepositoryDAO {
 
     void addUser(String name, String surname, String password, String email);
 
-    User getUser(Integer UserID);
+    User getUserByID(Integer UserID);
 
     List<User> getOrderedUsers();
 

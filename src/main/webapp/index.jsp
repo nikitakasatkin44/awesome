@@ -15,18 +15,10 @@
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar">1</span>
-                <span class="icon-bar">2</span>
-                <span class="icon-bar">3</span>
-            </button>
-
-        </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About me</a></li>
+                <li><a href="/registration" >Users</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
@@ -55,28 +47,44 @@
                 </div>
             </c:if>
 
-            <div id="login-form" class="modal">
-                <form class="modal-content animate" action="/registration">
-                    <div class="container">
-                        <label><b>Name</b></label>
-                        <input type="text" placeholder="Enter name" name="name" required>
+            <div class="container" id="login-form">
+                <div class="modal fade" id="myModallog" role="dialog">
+                    <div class="modal-dialog">
 
-                        <label><b>Surname</b></label>
-                        <input type="text" placeholder="Enter surname" name="surname" required>
+                        <div class="modal-content">
+                            <div class="modal-header" style="padding:35px 50px;">
+                                <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+                                <br><h2> Login</h2>
+                            </div>
 
-                        <label><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                            <div class="modal-body" style="padding:40px 50px;">
+                                <form action="/login" method="post" role="form" data-toggle="validator" name="loginForm" onsubmit="">
+                                    <c:set var="action" value="login"/>
 
-                        <button type="submit">Login</button>
-                        <input type="checkbox" checked="checked"> Remember me
+                                    <div class="form-group">
+                                        <label for="name"><span class="glyphicon glyphicon-user"></span> Username</label>
+                                        <input type="text" name="name" class="form-control" id="login-name" placeholder="Enter Username" value="${user.name}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pass1"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                                        <input type="password" name="pass" class="form-control" id="login-pass" placeholder="Enter password" value="${user.password}" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Log in</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                <p>Forgot <a href="#">Password?</a></p>
+                            </div>
+                        </div>
+
                     </div>
-
-                    <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                        <span class="psw">Forgot <a href="#">password?</a></span>
-                    </div>
-                </form>
+                </div>
             </div>
+
+
+
 
             <div class="container" id="registration-form">
 
@@ -100,8 +108,12 @@
                                         <input type="text" name="name" class="form-control" id="name" placeholder="Enter Username" value="${user.name}" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="surname"><span class="glyphicon glyphicon-user"></span> Lastname</label>
+                                        <input type="text" name="surname" class="form-control" id="surname" placeholder="Enter Lastname" value="${user.surname}" required>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="pass1"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                        <input type="password" name="pass1" class="form-control" id="pass1" placeholder="Enter password" value="${user.password}" required>
+                                        <input type="password" name="password" class="form-control" id="pass1" placeholder="Enter password" value="${user.password}" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="pass2"><span class="glyphicon glyphicon-eye-open"></span> Confirm password</label>
@@ -166,10 +178,16 @@
         return ok;
     }
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         $("#myBtnreg").click(function(){
             $("#myModalreg").modal();
         });
     });
+
+    $(document).ready(function() {
+        $("#myBtnlog").click(function() {
+            $("#myModallog").modal();
+        })
+    })
 </script>
 </html>
