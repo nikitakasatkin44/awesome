@@ -1,6 +1,8 @@
 package com.project;
 
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +17,13 @@ import java.io.IOException;
 )
 public class LoginServlet extends HttpServlet {
 
+    final static Logger logger = Logger.getLogger(LoginServlet.class);
+
     UserService userService = new UserService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("doPost request for /login");
         String login = req.getParameter("name");
         String password = req.getParameter("pass");
 
@@ -33,6 +38,7 @@ public class LoginServlet extends HttpServlet {
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {
+            logger.info("Entered username and password did not match.");
             System.out.println("The specified user does not exist");
             req.setAttribute("message", "Access denied.");
 

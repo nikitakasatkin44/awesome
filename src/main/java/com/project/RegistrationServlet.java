@@ -12,14 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+
 
 @WebServlet(
         name = "RegistrationServlet",
         urlPatterns = {"/registration"}
 )
 public class RegistrationServlet extends HttpServlet {
+
+    final static Logger logger = Logger.getLogger(RegistrationServlet.class);
+
 
     UserService userService = new UserService();
 
@@ -32,10 +35,15 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("searchAction");
 
-            List<User> users = userRepository.getOrderedUsers();
-            forwardListUsers(req, resp, users);
+        logger.info("doGet request for /registration");
+        String action = req.getParameter("searchAction");
+        List<User> users = userRepository.getOrderedUsers();
+        forwardListUsers(req, resp, users);
+
+
+
+
 
     }
 
@@ -51,6 +59,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String action = req.getParameter("action");
+        logger.info("doPost request for /registration, action = " + action);
         if (action == null) {action = "add";}
         switch (action) {
             case "add":

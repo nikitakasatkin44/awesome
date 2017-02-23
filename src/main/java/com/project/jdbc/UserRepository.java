@@ -37,7 +37,6 @@ public class UserRepository implements UserRepositoryDAO {
 
         try {
             int i = jdbcTemplate.update( SQL, name, surname, password, email);
-            System.out.println("i = " + i);
             System.out.println("Account for '" + name + " " + surname + "' has been created. Your password equals: " + password + " , and your email is: " + email);
             if (i > 0) {
                 System.out.println("You are successfully registered");
