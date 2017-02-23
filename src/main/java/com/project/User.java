@@ -13,12 +13,6 @@ public class User {
     private long id;
     private static final AtomicLong counter = new AtomicLong(1);
 
-    /*private static final List<User> userList = new ArrayList();
-
-    public static List<User> getUserList() {
-        return userList;
-    }*/
-
     public User(String name, String surname, String password, String email, long id) {
         this.name = name;
         this.surname = surname;

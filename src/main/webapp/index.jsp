@@ -20,7 +20,7 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="/registration" >Users</a></li>
                 <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><button type="button" class="btn btn-success btn-lg" id="myBtnlog" onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button></li>
@@ -100,9 +100,7 @@
 
                             <div class="modal-body" style="padding:40px 50px;">
                                 <form action="/registration" method="post" role="form" data-toggle="validator" name="registrationForm" onsubmit="return validateForm()">
-                                    <c:if test ="${empty action}">
-                                        <c:set var="action" value="add"/>
-                                    </c:if>
+                                    <c:set var="action" value="add"/>
                                     <div class="form-group">
                                         <label for="name"><span class="glyphicon glyphicon-user"></span> Username</label>
                                         <input type="text" name="name" class="form-control" id="name" placeholder="Enter Username" value="${user.name}" required>
@@ -188,6 +186,8 @@
         $("#myBtnlog").click(function() {
             $("#myModallog").modal();
         })
-    })
+    });
+
+
 </script>
 </html>

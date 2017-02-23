@@ -48,14 +48,7 @@ public class UserRepository implements UserRepositoryDAO {
             System.out.println("Duplicate record");
             return;
         }
-
-
-
-
-
     }
-
-
 
     public User getUserByID(Integer UserID) {
         String SQL = "select * from " + TABLE_NAME + " where id = ?";
@@ -67,10 +60,13 @@ public class UserRepository implements UserRepositoryDAO {
 
     public User getUserByLogin(String login) {
         String SQL = "select * from " + TABLE_NAME + " where name = ?";
-        User user = jdbcTemplate.queryForObject(SQL, new Object[]{login}, new UserMapper());
+        User user = new User();
+
+        user = jdbcTemplate.queryForObject(SQL, new Object[]{login}, new UserMapper());
 
         return user;
     }
+    //TODO
 
     public List<User> getUsers() {
         String SQL = "select * from " + TABLE_NAME;
@@ -80,32 +76,9 @@ public class UserRepository implements UserRepositoryDAO {
 
     }
 
-    public List<User> getUsersByName(String login) {
-        String SQL = "select * from " + TABLE_NAME + " where name = ?";
-
-
-
-        List<User> users = new ArrayList<User>();
-
-        List<Map<String, Object>> userRows = jdbcTemplate.queryForList(SQL);
-
-        for(Map<String, Object> userRow : userRows) {
-            User user = new User();
-
-            user.setId(Integer.parseInt(String.valueOf(userRow.get("id"))));
-            user.setName(String.valueOf(userRow.get("name")));
-            user.setSurname(String.valueOf(userRow.get("surname")));
-            user.setPassword(String.valueOf(userRow.get("password")));
-            user.setEmail(String.valueOf(userRow.get("email")));
-        }
-        return users;
-
-    }
-
     public List<User> getOrderedUsers() {
         String SQL = "select * from " + TABLE_NAME ;
-        List <User> users = jdbcTemplate.query(SQL,
-                new UserMapper());
+        List <User> users = jdbcTemplate.query(SQL, new UserMapper());
         return users;
     }
 
@@ -114,11 +87,12 @@ public class UserRepository implements UserRepositoryDAO {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void delete(Integer userID) {
+    public int delete(Integer userID) {
         String SQL = "delete from users where id = ?";
 
-        jdbcTemplate.update(SQL, userID);
+        int i = jdbcTemplate.update(SQL, userID);
         System.out.println("Deleted Record with ID = " + userID);
+        return i;
     }
 
     public void update(Integer userID, Integer salary) {

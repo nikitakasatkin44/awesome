@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/bootstrap.min.js"></script>
 </head>
-<title>Authorization successful!</title>
+<title>Contact page</title>
 <body>
 
 <nav class="navbar navbar-inverse">
@@ -14,24 +14,21 @@
                 <li><a href="/index.jsp">Home</a></li>
                 <li><a href="/registration">Users</a></li>
                 <li><a href="#">Projects</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li class="active"><a href="/contact">Contact</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container-fluid text-center">
-    <div class="alert alert-success">
-        <strong>Authorization successful!</strong>
-    </div>
-    <br>
-    <button type="button" id="redirectBtn" onclick="redirect();" class="btn btn-primary btn-lg">Return to the Landing page</button>
+    <h2><strong>Information about me</strong></h2>
+
+
+
 </div>
 </body>
 
 <script>
-    function redirect() {
-        window.location.replace('http://localhost:8080/index.jsp');
-    }
+
 </script>
 </html>

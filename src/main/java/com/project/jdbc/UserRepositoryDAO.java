@@ -17,7 +17,7 @@ public interface UserRepositoryDAO {
 
     void setDataSource(DataSource dataSource);
 
-    void delete(Integer UserID);
+    int delete(Integer UserID);
 
     void update(Integer UserID, Integer salary);
 

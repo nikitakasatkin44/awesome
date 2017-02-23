@@ -22,26 +22,24 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("name");
         String password = req.getParameter("pass");
 
-        User user = userService.getUser(login);
-        System.out.println(user.getPassword());
-        System.out.println(password);
+        try {
+            User user = userService.getUser(login);
+            System.out.println(user.getPassword());
+            System.out.println(password);
 
+            req.setAttribute("message", "Login successful.");
 
-        if(1 == 1) {
-                String message = "Login successful.";
-                req.setAttribute("message", message);
-
-            String nextJSP = "/jsp/success.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/success.jsp");
             dispatcher.forward(req, resp);
-        } else {
-            String message = "Access denied.";
-            req.setAttribute("message", message);
 
-            String nextJSP = "/jsp/failure.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+        } catch (Exception e) {
+            System.out.println("The specified user does not exist");
+            req.setAttribute("message", "Access denied.");
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/failure.jsp");
             dispatcher.forward(req, resp);
-            }
+
         }
     }
+}
 
