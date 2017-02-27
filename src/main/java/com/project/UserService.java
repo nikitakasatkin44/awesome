@@ -30,9 +30,17 @@ public class UserService {
         return userList;
     }
 
-    public void addUser(String name, String surname, String password, String email) {
-        userRepository.addUser(name, surname, password, email);
-        return;
+    public boolean addUserToDB(String name, String surname, String password, String email) {
+
+        if ((!userRepository.isUserExists(name)) && !userRepository.isEmailExists(email)) {
+
+            userRepository.addUser(name, surname, password, email);
+            return true;
+        } else {
+            System.out.println("can't addUser(User already exists!)");
+            return false;
+        }
+
     }
 
     public boolean updateUser(User user) {

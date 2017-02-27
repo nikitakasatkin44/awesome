@@ -41,9 +41,10 @@
         <div class="col-sm-8 text-left">
             <h1>Landing Page</h1>
 
+            <c:set var="message" scope="session" value=""/>
             <c:if test="${not empty message}">
                 <div class="alert alert-success">
-                    ${message}
+                    <c:out value="${message}"/>
                 </div>
             </c:if>
 

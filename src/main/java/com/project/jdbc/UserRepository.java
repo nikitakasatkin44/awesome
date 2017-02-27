@@ -60,12 +60,47 @@ public class UserRepository implements UserRepositoryDAO {
     public User getUserByLogin(String login) {
         String SQL = "select * from " + TABLE_NAME + " where name = ?";
         User user = new User();
+        try {
+            user = jdbcTemplate.queryForObject(SQL, new Object[]{login}, new UserMapper());
+            System.out.println("www");
+            return user;
+        } catch(Exception e) {
+            System.out.println("qqq");
 
-        user = jdbcTemplate.queryForObject(SQL, new Object[]{login}, new UserMapper());
-
+        }
         return user;
+
+
     }
-    //TODO
+
+
+    public boolean isUserExists(String login) {
+
+        String SQL = "select count(*) from " + TABLE_NAME + " where name = ?";
+        boolean result = false;
+
+        int count = jdbcTemplate.queryForObject(SQL, new Object[]{login}, Integer.class);
+
+        if (count > 0) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    public boolean isEmailExists(String email) {
+
+        String SQL = "select count(*) from " + TABLE_NAME + " where email = ?";
+        boolean result = false;
+
+        int count = jdbcTemplate.queryForObject(SQL, new Object[]{email}, Integer.class);
+
+        if (count > 0) {
+            result = true;
+        }
+
+        return result;
+    }
 
     public List<User> getUsers() {
         String SQL = "select * from " + TABLE_NAME;

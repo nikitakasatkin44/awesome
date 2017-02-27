@@ -32,10 +32,23 @@ public class LoginServlet extends HttpServlet {
             System.out.println(user.getPassword());
             System.out.println(password);
 
-            req.setAttribute("message", "Login successful.");
+            if (user.getPassword() == password) {
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/success.jsp");
-            dispatcher.forward(req, resp);
+                req.setAttribute("message", "Login successful.");
+
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/success.jsp");
+                dispatcher.forward(req, resp);
+            } else {
+
+                req.setAttribute("message", "The username and password did not match.");
+
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/failure.jsp");
+                dispatcher.forward(req, resp);
+            }
+
+
+
+
 
         } catch (Exception e) {
             logger.info("Entered username and password did not match.");

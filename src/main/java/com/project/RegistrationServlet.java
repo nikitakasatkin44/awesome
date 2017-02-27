@@ -81,13 +81,23 @@ public class RegistrationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
 
+        logger.info(name + surname + password + email);
+
         try {
-            userService.addUser(name, surname, password, email);
-            List<User> userList = userService.getAllUsers();
-            req.setAttribute("idUser", 1);
-            String message = "The new user has been successfully created.";
-            req.setAttribute("message", message);
-            forwardListUsers(req, resp, userList);
+            if (userService.addUserToDB(name, surname, password, email)) {
+                System.out.println("user added!");
+                List<User> userList = userService.getAllUsers();
+                req.setAttribute("idUser", 1);
+                req.setAttribute("message", "The new user has been successfully created.");
+                forwardListUsers(req, resp, userList);
+            } else {
+                System.out.println("user not added!");
+                req.setAttribute("message", "User already exists!");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/registr-fail.jsp");
+                dispatcher.forward(req, resp);
+            }
+
+
         } catch(Exception e) {}
     }
 

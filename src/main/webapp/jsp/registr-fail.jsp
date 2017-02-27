@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/bootstrap.min.js"></script>
 </head>
-    <title>Authorization failed!</title>
+<title>Authorization failed!</title>
 <body>
 
 <nav class="navbar navbar-inverse">
@@ -21,11 +21,11 @@
 </nav>
 
 <div class="container-fluid text-center">
-        <div class="alert alert-warning">
-            <strong>The username and password you entered did not match our records. Please double-check and try again.</strong>
-        </div>
-<br>
-<button type="button" id="redirectBtn" onclick="redirect();" class="btn btn-primary btn-lg">Return to authorization</button>
+    <div class="alert alert-warning">
+        <strong> User already exists!</strong>
+    </div>
+    <br>
+    <button type="button" id="redirectBtn" onclick="redirect();" class="btn btn-primary btn-lg">Return to authorization</button>
 </div>
 </body>
 
