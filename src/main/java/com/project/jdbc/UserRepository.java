@@ -62,11 +62,9 @@ public class UserRepository implements UserRepositoryDAO {
         User user = new User();
         try {
             user = jdbcTemplate.queryForObject(SQL, new Object[]{login}, new UserMapper());
-            System.out.println("www");
-            return user;
+            System.out.println("User received from DB");
         } catch(Exception e) {
-            System.out.println("qqq");
-
+            System.out.println("Specified user doesn't exist");
         }
         return user;
 

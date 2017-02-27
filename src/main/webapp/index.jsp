@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-
+        .btn {  margin-right: 10px;  }
     </style>
 </head>
 <body>
@@ -19,7 +19,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="/registration" >Users</a></li>
-                <li><a href="#">Projects</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -43,10 +42,11 @@
 
             <c:set var="message" scope="session" value=""/>
             <c:if test="${not empty message}">
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="alertMessage">
                     <c:out value="${message}"/>
                 </div>
             </c:if>
+            <c:otherwise><script>$('#alertMessage').hide();</script></c:otherwise>
 
             <div class="container" id="login-form">
                 <div class="modal fade" id="myModallog" role="dialog">
@@ -84,12 +84,7 @@
                 </div>
             </div>
 
-
-
-
             <div class="container" id="registration-form">
-
-
                 <div class="modal fade" id="myModalreg" role="dialog">
                     <div class="modal-dialog">
 
@@ -155,11 +150,6 @@
 </div>
 
 
-
-<footer class="container-fluid text-center">
-    <p>Footer Text</p>
-</footer>
-
 </body>
 
 <script language="JavaScript" type="text/javascript">
@@ -188,7 +178,5 @@
             $("#myModallog").modal();
         })
     });
-
-
 </script>
 </html>

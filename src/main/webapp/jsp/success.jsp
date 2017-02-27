@@ -13,7 +13,6 @@
             <ul class="nav navbar-nav">
                 <li><a href="/index.jsp">Home</a></li>
                 <li><a href="/registration">Users</a></li>
-                <li><a href="#">Projects</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </div>
